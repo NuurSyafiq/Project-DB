@@ -1,0 +1,70 @@
+{{#extends "base"}}
+
+{{#block "content"}}
+<h1 class="text-center mb-4">New Shipment</h1>
+
+<div class="d-flex justify-content-center">
+    <form method="POST" class="p-3 border rounded shadow-sm" style="width: 100%; max-width: 800px;">
+
+        <div class="row">
+            <div class="col-md-6">
+                <label class="form-label">Tracking Number</label>
+                <input type="text" name="tracking_number" class="form-control form-control-sm" required/>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Shipment Date</label>
+                <input type="date" name="shipment_date" class="form-control form-control-sm" required/>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-6">
+                <label class="form-label">Origin</label>
+                <input type="text" name="origin" class="form-control form-control-sm" required/>
+            </div>
+
+            <div class="col-md-6">
+                <label class="form-label">Destination</label>
+                <input type="text" name="destination" class="form-control form-control-sm" required/>
+            </div>
+        </div>
+
+        <div class="row mt-2">
+            <div class="col-md-4">
+                <label class="form-label">Weight (kg)</label>
+                <input type="number" step="0.01" name="weight" class="form-control form-control-sm" required/>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Quantity</label>
+                <input type="number" name="quantity" class="form-control form-control-sm" required/>
+            </div>
+
+            <div class="col-md-4">
+                <label class="form-label">Status</label>
+                <select class="form-control form-control-sm" name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="In Transit">In Transit</option>
+                    <option value="Delivered">Delivered</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="mt-2">
+            <label class="form-label">Handler</label>
+            <select class="form-control form-control-sm" name="handler_id">
+                {{#each handler}}
+                <option value="{{handler_id}}">{{name}}</option>
+                {{/each}}
+            </select>
+        </div>
+
+        <div class="text-center mt-3">
+            <input type="submit" value="Create Shipment" class="btn btn-sm btn-primary"/>
+        </div>
+
+    </form>
+</div>
+{{/block}} 
+{{/extends}} 

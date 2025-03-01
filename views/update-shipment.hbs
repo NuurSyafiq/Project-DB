@@ -1,0 +1,65 @@
+{{#extends "base"}}
+
+{{#block "content"}}
+
+<h1>Update Shipment: {{shipment.tracking_number}}</h1>
+
+<form method="POST">
+
+    <div>
+        <label>Tracking Number</label>
+        <input type="text" name="tracking_number" class="form-control" value="{{shipment.tracking_number}}" required/>
+    </div>
+
+    <div>
+        <label>Origin</label>
+        <input type="text" name="origin" class="form-control" value="{{shipment.origin}}" required/>
+    </div>
+
+    <div>
+        <label>Destination</label>
+        <input type="text" name="destination" class="form-control" value="{{shipment.destination}}" required/>
+    </div>
+
+    <div>
+        <label>Weight (kg)</label>
+        <input type="number" name="weight" class="form-control" value="{{shipment.weight}}" step="0.01" required/>
+    </div>
+
+    <div>
+        <label>Quantity</label>
+        <input type="number" name="quantity" class="form-control" value="{{shipment.quantity}}" required/>
+    </div>
+
+    <div>
+        <label>Handler</label>
+        <select class="form-control" name="handler_id">
+            {{#each handlers}}
+            <option value="{{this.handler_id}}" 
+            {{#eq this.handler_id ../shipment.handler_id}}selected{{/eq}}>{{this.handler_name}}</option>
+            {{/each}}
+        </select>
+    </div>
+
+    <div>
+        <label>Status</label>
+        <select class="form-control" name="status">
+            <option value="Pending" {{#eq shipment.status "Pending"}}selected{{/eq}}>Pending</option>
+            <option value="In Transit" {{#eq shipment.status "In Transit"}}selected{{/eq}}>In Transit</option>
+            <option value="Delivered" {{#eq shipment.status "Delivered"}}selected{{/eq}}>Delivered</option>
+        </select>
+    </div>
+
+    <div>
+        <label>Shipment Date</label>
+        <input type="date" name="shipment_date" class="form-control" value="{{shipment.shipment_date}}" required/>
+    </div>
+
+    <input type="submit" value="Update Shipment" class="btn btn-primary mt-2 mb-2"/>
+
+</form>
+
+
+{{/block}}
+
+{{/extends}}

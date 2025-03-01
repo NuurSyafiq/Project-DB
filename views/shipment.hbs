@@ -1,0 +1,56 @@
+{{#extends "base"}}
+
+{{#block "content"}}
+
+<div class="container d-flex flex-column justify-content-center align-items-center text-center mt-5">
+    <h1>Shipment Details</h1>
+    <p>Track and manage cargo shipments efficiently.</p>
+</div>
+
+<div class="container mt-5">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered text-center">
+            <thead class="table-dark">
+                <tr>
+                    <th class="text-center ">Tracking Number</th>
+                    <th class="text-center">Origin</th>
+                    <th class="text-center">Destination</th>
+                    <th class="text-center">Weight (kg)</th>
+                    <th class="text-center">Quantity</th>
+                    <th class="text-center">Handler Name</th>
+                    <th class="text-center">Status</th>
+                    <th class="text-center">Shipment Date</th>
+                    <th class="text-center">Actions</th> <!-- New column for actions -->
+                </tr>
+            </thead>
+            <tbody>
+                {{#each shipment}}
+                <tr>
+                    <td class="text-center ">{{tracking_number}}</td>
+                    <td class="text-center ">{{origin}}</td>
+                    <td class="text-center">{{destination}}</td> 
+                    <td class="text-center">{{weight}}</td>
+                    <td class="text-center">{{quantity}}</td>
+                    <td class="text-center">{{name}}</td>
+                    <td class="text-center">
+                        {{#if (eq status "Delivered")}}
+                            <span class="badge bg-success">Delivered</span>
+                        {{else if (eq status "In Transit")}}
+                            <span class="badge bg-warning text-dark">In Transit</span>
+                        {{else}}
+                            <span class="badge bg-secondary">Pending</span>
+                        {{/if}}
+                    </td>
+                    <td class="text-center">{{shipment_date}}</td> 
+                    <td class="text-center">
+                        <a href="/shipment/{{shipment_id}}/delete" class="btn btn-danger btn-sm mb-3">Delete</a>
+                        <a href="/shipment/{{shipment_id}}/edit" class="btn btn-primary btn-sm">Edit</a>
+                    </td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
+</div>
+{{/block}}
+{{/extends}} 
